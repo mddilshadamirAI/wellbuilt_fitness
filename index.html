@@ -1,1896 +1,559 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0d0a">
-  <meta name="description" content="R.M Fitness, Meerut — commercial gym equipment manufacturing, customised fitness machinery, and complete gym setups with pan-India delivery.">
-  <title>R.M Fitness | Built for Serious Training</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #0a0d0a;
-      --panel: #141914;
-      --panel2: #1c231c;
-      --lime: #c8ff3d;
-      --white: #f7f8f2;
-      --muted: #a4ada1;
-      --paper: #eff0e8;
-      --dark: #121610;
-      --line: rgba(255,255,255,.13);
-      --display: "Barlow Condensed", Impact, sans-serif;
-      --body: "DM Sans", Arial, sans-serif;
-      --width: 1240px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--body);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    body.menu-open { overflow: hidden; }
-
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    img { max-width: 100%; display: block; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    ::selection { background: var(--lime); color: var(--bg); }
-
-    .container {
-      width: min(var(--width), calc(100% - 48px));
-      margin-inline: auto;
-    }
-
-    .section { padding: 105px 0; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--lime);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      height: 2px;
-      width: 25px;
-      background: var(--lime);
-    }
-
-    .section-title {
-      font: 800 clamp(48px, 7vw, 84px)/.92 var(--display);
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      margin: 15px 0 20px;
-    }
-
-    .section-title span { color: var(--lime); }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 530px;
-      font-size: 15px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 30px;
-      margin-bottom: 42px;
-    }
-
-    .btn {
-      min-height: 52px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 0 24px;
-      background: var(--lime);
-      color: var(--bg);
-      border: 1px solid var(--lime);
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      transition: .25s ease;
-    }
-
-    .btn:hover {
-      background: #e0ff9a;
-      border-color: #e0ff9a;
-      transform: translateY(-3px);
-    }
-
-    .btn-outline {
-      color: white;
-      background: transparent;
-      border-color: rgba(255,255,255,.4);
-    }
-
-    .btn-outline:hover {
-      color: var(--bg);
-      background: white;
-      border-color: white;
-    }
-
-    .btn-dark {
-      background: var(--bg);
-      border-color: var(--bg);
-      color: white;
-    }
-
-    /* NAVIGATION */
-
-    .header {
-      position: absolute;
-      inset: 0 0 auto;
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,.14);
-    }
-
-    .nav {
-      min-height: 84px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .brand-symbol {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      background: var(--lime);
-      color: var(--bg);
-      font: 900 22px var(--display);
-      clip-path: polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-    }
-
-    .brand-name {
-      font: 800 28px/.9 var(--display);
-      letter-spacing: .4px;
-    }
-
-    .brand-caption {
-      display: block;
-      color: #b3bdb1;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-top: 7px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 27px;
-    }
-
-    .nav-links a {
-      font-size: 12px;
-      font-weight: 700;
-      color: #e0e5dc;
-      transition: color .2s;
-    }
-
-    .nav-links a:hover { color: var(--lime); }
-
-    .menu-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      font-size: 25px;
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 760px;
-      min-height: min(900px, 100svh);
-      position: relative;
-      isolation: isolate;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      padding: 145px 0 110px;
-      background: #111611;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      z-index: -2;
-      inset: 0;
-      background: url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2200&q=85") center 45%/cover no-repeat;
-      animation: heroZoom 16s ease-in-out infinite alternate;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(5,8,5,.96), rgba(5,8,5,.77) 43%, rgba(5,8,5,.2)),
-        linear-gradient(0deg, rgba(5,8,5,.85), transparent 55%);
-    }
-
-    @keyframes heroZoom {
-      from { transform: scale(1); }
-      to { transform: scale(1.07); }
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1fr) 190px;
-      gap: 45px;
-      align-items: end;
-    }
-
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(10,13,10,.6);
-      border: 1px solid rgba(200,255,61,.42);
-      color: #e5ffb1;
-      padding: 9px 13px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-    }
-
-    .hero-label span {
-      width: 7px;
-      height: 7px;
-      background: var(--lime);
-      border-radius: 50%;
-      box-shadow: 0 0 0 5px rgba(200,255,61,.13);
-    }
-
-    .hero h1 {
-      max-width: 850px;
-      margin: 30px 0 23px;
-      font: 900 clamp(64px, 10.5vw, 142px)/.77 var(--display);
-      letter-spacing: -2px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 span { display: block; }
-    .hero .outline {
-      color: transparent;
-      -webkit-text-stroke: 1.5px white;
-    }
-    .hero .highlight { color: var(--lime); }
-
-    .hero-description {
-      color: #d0d7ce;
-      max-width: 520px;
-      font-size: 16px;
-      margin: 28px 0 30px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-aside {
-      border-left: 1px solid rgba(255,255,255,.4);
-      padding-left: 22px;
-      margin-bottom: 7px;
-    }
-
-    .hero-aside strong {
-      color: var(--lime);
-      display: block;
-      font: 800 36px/1 var(--display);
-    }
-
-    .hero-aside p {
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 1.4px;
-      line-height: 1.8;
-      margin-top: 9px;
-      color: #e0e4db;
-    }
-
-    .hero-aside hr {
-      border: none;
-      width: 40px;
-      height: 2px;
-      background: var(--lime);
-      margin: 25px 0;
-    }
-
-    .hero-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-top: 1px solid rgba(255,255,255,.18);
-    }
-
-    .hero-bottom-inner {
-      min-height: 65px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      color: #e1e4dd;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-
-    .hero-bottom span { color: var(--lime); }
-
-    /* MOVING STRIP */
-
-    .ticker {
-      background: var(--lime);
-      color: var(--bg);
-      overflow: hidden;
-    }
-
-    .ticker-track {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 18px 30px;
-      padding: 18px 24px;
-      font: 800 22px/1 var(--display);
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-
-    .ticker-track span::after {
-      content: " ✳";
-      margin-left: 18px;
-    }
-
-    /* EQUIPMENT */
-
-    .equipment {
-      background: var(--paper);
-      color: var(--dark);
-    }
-
-    .equipment .eyebrow { color: #4d6815; }
-    .equipment .eyebrow::before { background: #4d6815; }
-    .equipment .section-description { color: #666e61; }
-
-    .equipment-grid {
-      display: grid;
-      grid-template-columns: repeat(4,minmax(0,1fr));
-      gap: 14px;
-    }
-
-    .equipment-card {
-      min-height: 380px;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      background: #cbd0c7;
-    }
-
-    .equipment-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background: var(--image) center/cover no-repeat;
-      transition: transform .6s ease;
-    }
-
-    .equipment-card::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(3,6,4,.95), rgba(3,6,4,.32) 60%, rgba(3,6,4,.05));
-    }
-
-    .equipment-card:hover::before { transform: scale(1.08); }
-
-    .equipment-number {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      border: 1px solid rgba(255,255,255,.65);
-      padding: 6px 10px;
-      font: 700 19px var(--display);
-      color: white;
-    }
-
-    .equipment-content {
-      position: absolute;
-      left: 21px;
-      right: 18px;
-      bottom: 22px;
-      color: white;
-    }
-
-    .equipment-content h3 {
-      font: 700 35px/.95 var(--display);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .equipment-content p {
-      color: #d9dfd6;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .equipment-content a {
-      display: inline-block;
-      color: var(--lime);
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 15px;
-    }
-
-    /* ABOUT */
-
-    .about { background: var(--bg); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 75px;
-      align-items: center;
-    }
-
-    .about-image {
-      min-height: 590px;
-      position: relative;
-      background: url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1100&q=85") center/cover no-repeat;
-    }
-
-    .about-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border: 1px solid rgba(200,255,61,.25);
-      margin: 14px;
-      pointer-events: none;
-    }
-
-    .image-stamp {
-      position: absolute;
-      z-index: 2;
-      bottom: 28px;
-      left: 28px;
-      max-width: 245px;
-      background: var(--lime);
-      color: var(--bg);
-      padding: 23px;
-    }
-
-    .image-stamp strong {
-      display: block;
-      font: 800 35px/.95 var(--display);
-      text-transform: uppercase;
-    }
-
-    .image-stamp span {
-      display: block;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-top: 10px;
-      text-transform: uppercase;
-    }
-
-    .about-copy > p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 19px 0;
-    }
-
-    .feature-list { margin-top: 26px; }
-
-    .feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      border-top: 1px solid var(--line);
-      padding: 19px 0;
-    }
-
-    .feature-icon {
-      display: grid;
-      place-items: center;
-      flex: 0 0 38px;
-      height: 38px;
-      background: rgba(200,255,61,.1);
-      color: var(--lime);
-      font-size: 18px;
-    }
-
-    .feature h3 { font-size: 14px; margin-bottom: 3px; }
-    .feature p { color: var(--muted); font-size: 12px; }
-
-    /* PROCESS / CAPABILITIES */
-
-    .benefits {
-      background: var(--lime);
-      color: var(--bg);
-      padding: 45px 0;
-    }
-
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 25px;
-    }
-
-    .benefit {
-      border-left: 1px solid rgba(10,13,10,.3);
-      padding-left: 20px;
-    }
-
-    .benefit strong {
-      display: block;
-      font: 800 30px/1.1 var(--display);
-      text-transform: uppercase;
-    }
-
-    .benefit p {
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 5px;
-    }
-
-    /* PACKAGES */
-
-    .packages { background: var(--paper); color: var(--dark); }
-
-    .packages .eyebrow { color: #4d6815; }
-    .packages .eyebrow::before { background: #4d6815; }
-    .packages .section-description { color: #666e61; }
-
-    .package-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .package {
-      background: #fff;
-      border: 1px solid #d8ddd1;
-      padding: clamp(26px,4vw,48px);
-      display: flex;
-      flex-direction: column;
-      min-height: 410px;
-    }
-
-    .package.featured {
-      background: var(--panel);
-      color: white;
-      border-color: var(--panel);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .package-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .package-type {
-      font-size: 10px;
-      font-weight: 900;
-      color: #697360;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .featured .package-type { color: var(--lime); }
-
-    .popular {
-      background: var(--lime);
-      color: var(--bg);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      padding: 7px 10px;
-      text-transform: uppercase;
-    }
-
-    .package h3 {
-      font: 800 clamp(38px,5vw,63px)/.9 var(--display);
-      text-transform: uppercase;
-      margin: 38px 0 14px;
-    }
-
-    .package > p {
-      color: #6b7167;
-      font-size: 13px;
-      margin-bottom: 23px;
-      max-width: 430px;
-    }
-
-    .featured > p { color: #b5bdb0; }
-
-    .price {
-      font: 800 clamp(43px,5vw,64px)/1 var(--display);
-      margin-bottom: 8px;
-    }
-
-    .price small {
-      font: 700 11px var(--body);
-      color: #737b6d;
-    }
-
-    .featured .price small { color: #b5bdb0; }
-
-    .package-note {
-      color: #858b7e;
-      font-size: 11px;
-      margin-bottom: 25px;
-    }
-
-    .package .btn {
-      margin-top: auto;
-      align-self: flex-start;
-    }
-
-    .package-disclaimer {
-      font-size: 11px;
-      color: #72786b;
-      margin-top: 17px;
-    }
-
-    /* CUSTOMISATION */
-
-    .custom {
-      position: relative;
-      overflow: hidden;
-      background: #131913;
-    }
-
-    .custom::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1900&q=80") center/cover no-repeat;
-      opacity: .18;
-    }
-
-    .custom-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1.1fr .8fr;
-      gap: 65px;
-      align-items: center;
-    }
-
-    .custom h2 {
-      font: 900 clamp(55px,8vw,100px)/.83 var(--display);
-      text-transform: uppercase;
-      margin: 18px 0 25px;
-    }
-
-    .custom h2 span { color: var(--lime); }
-
-    .custom-copy > p {
-      max-width: 550px;
-      color: #bac3b7;
-      font-size: 14px;
-    }
-
-    .color-options {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      flex-wrap: wrap;
-      margin: 25px 0 30px;
-    }
-
-    .swatch {
-      width: 31px;
-      height: 31px;
-      border: 2px solid rgba(255,255,255,.4);
-      border-radius: 50%;
-    }
-
-    .swatch-label {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #e4e9df;
-    }
-
-    .custom-panel {
-      background: rgba(7,11,7,.78);
-      border: 1px solid rgba(255,255,255,.2);
-      padding: 30px;
-      backdrop-filter: blur(12px);
-    }
-
-    .custom-panel small {
-      color: var(--lime);
-      font-weight: 900;
-      letter-spacing: 1.5px;
-    }
-
-    .custom-panel h3 {
-      font: 700 36px/.95 var(--display);
-      text-transform: uppercase;
-      margin: 13px 0 22px;
-    }
-
-    .custom-panel ul { list-style: none; }
-
-    .custom-panel li {
-      border-top: 1px solid var(--line);
-      padding: 14px 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      color: #e3e8df;
-      font-size: 12px;
-    }
-
-    .custom-panel li span { color: var(--lime); }
-
-    /* HOW IT WORKS */
-
-    .process {
-      background: var(--paper);
-      color: var(--dark);
-    }
-
-    .process .eyebrow { color: #4d6815; }
-    .process .eyebrow::before { background: #4d6815; }
-    .process .section-description { color: #626a5f; }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      border: 1px solid #cbd0c4;
-    }
-
-    .process-step {
-      padding: 30px;
-      min-height: 245px;
-      border-right: 1px solid #cbd0c4;
-    }
-
-    .process-step:last-child { border-right: 0; }
-
-    .step-top {
-      display: flex;
-      justify-content: space-between;
-      color: #68715f;
-      font: 700 19px var(--display);
-    }
-
-    .step-top span { color: #3e5812; }
-
-    .process-step h3 {
-      font: 700 33px/.95 var(--display);
-      text-transform: uppercase;
-      margin: 48px 0 12px;
-    }
-
-    .process-step p {
-      color: #687064;
-      font-size: 12px;
-    }
-
-    /* FAQ */
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: .7fr 1.3fr;
-      gap: 75px;
-      align-items: start;
-    }
-
-    .faq-intro p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 15px 0;
-    }
-
-    .faq-list { border-top: 1px solid var(--line); }
-
-    .faq-list details { border-bottom: 1px solid var(--line); }
-
-    .faq-list summary {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      cursor: pointer;
-      padding: 21px 0;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .faq-list summary::-webkit-details-marker { display: none; }
-
-    .faq-list summary span {
-      width: 28px;
-      height: 28px;
-      border: 1px solid rgba(200,255,61,.5);
-      color: var(--lime);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      transition: .2s;
-    }
-
-    .faq-list details[open] summary span {
-      background: var(--lime);
-      color: var(--bg);
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      color: var(--muted);
-      font-size: 13px;
-      padding: 0 40px 22px 0;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: var(--lime);
-      color: var(--bg);
-      padding: 85px 0 0;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr .8fr;
-      gap: 65px;
-      padding-bottom: 75px;
-    }
-
-    .contact .eyebrow { color: #40551c; }
-    .contact .eyebrow::before { background: #40551c; }
-
-    .contact h2 {
-      font: 900 clamp(63px,9vw,115px)/.8 var(--display);
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      margin: 20px 0 24px;
-    }
-
-    .contact h2 span {
-      display: block;
-      color: white;
-      -webkit-text-stroke: 1px var(--bg);
-    }
-
-    .contact-copy > p {
-      color: #3e4d2a;
-      max-width: 500px;
-      font-size: 14px;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .contact-details {
-      border-top: 1px solid rgba(10,13,10,.28);
-    }
-
-    .contact-detail {
-      display: grid;
-      grid-template-columns: 38px 1fr;
-      gap: 15px;
-      padding: 19px 0;
-      border-bottom: 1px solid rgba(10,13,10,.28);
-    }
-
-    .detail-icon {
-      border: 1px solid rgba(10,13,10,.5);
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      font-size: 18px;
-    }
-
-    .detail-label {
-      display: block;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .detail-value {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    a.detail-value:hover { text-decoration: underline; }
-
-    .map {
-      height: 320px;
-      position: relative;
-      overflow: hidden;
-      border-top: 1px solid rgba(10,13,10,.25);
-      background: #dce3ca;
-    }
-
-    .map iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      filter: grayscale(1) contrast(.94);
-      mix-blend-mode: multiply;
-    }
-
-    .map-label {
-      position: absolute;
-      bottom: 18px;
-      left: max(24px, calc((100% - var(--width))/2));
-      background: var(--bg);
-      color: white;
-      padding: 13px 17px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #070907;
-      color: white;
-    }
-
-    .footer-main {
-      padding: 35px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    .footer-main p {
-      font-size: 11px;
-      color: #8c9487;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 11px;
-      color: #d5dbd0;
-    }
-
-    .footer-links a:hover { color: var(--lime); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      padding: 17px 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      color: #879083;
-      font-size: 10px;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 80;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--lime);
-      color: var(--bg);
-      font-size: 29px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.4);
-      transition: .25s;
-    }
-
-    .whatsapp-float:hover {
-      transform: translateY(-4px) scale(1.05);
-    }
-
-    /* ANIMATIONS */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* TABLET */
-
-    @media (max-width: 1000px) {
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 11px; }
-      .nav > .btn { display: none; }
-
-      .equipment-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
-      }
-
-      .equipment-card { min-height: 400px; }
-      .about-grid { gap: 35px; }
-      .custom-grid { gap: 35px; }
-      .faq-grid { gap: 40px; }
-      .contact-grid { gap: 35px; }
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 760px) {
-      .container { width: calc(100% - 36px); }
-      .section { padding: 75px 0; }
-
-      .nav { min-height: 72px; }
-      .brand-symbol { width: 39px; height: 39px; }
-      .brand-name { font-size: 25px; }
-
-      .menu-toggle {
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-      }
-
-      .nav-links {
-        position: fixed;
-        inset: 72px 0 0;
-        height: calc(100dvh - 72px);
-        overflow-y: auto;
-        padding: 35px 25px;
-        background: #0a0d0a;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-8px);
-        transition: .25s ease;
-      }
-
-      .nav-links.open {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .nav-links a {
-        font-size: 22px;
-        padding: 17px 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav-links .mobile-contact {
-        display: block;
-        margin-top: 22px;
-        padding: 16px 20px;
-        text-align: center;
-        background: var(--lime);
-        color: var(--bg);
-        border: 0;
-        font-size: 12px;
-      }
-
-      .hero {
-        min-height: 760px;
-        min-height: 94svh;
-        padding: 125px 0 110px;
-      }
-
-      .hero::after {
-        background:
-          linear-gradient(90deg,rgba(5,8,5,.91),rgba(5,8,5,.55)),
-          linear-gradient(0deg,rgba(5,8,5,.88),transparent 60%);
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .hero h1 {
-        font-size: clamp(62px, 17vw, 105px);
-        letter-spacing: -1px;
-        line-height: .81;
-        overflow-wrap: anywhere;
-      }
-
-      .hero-description { font-size: 14px; }
-      .hero-aside { display: none; }
-
-      .hero-actions .btn {
-        flex: 1 1 150px;
-        padding: 0 13px;
-        font-size: 10px;
-      }
-
-      .hero-bottom-inner {
-        min-height: 58px;
-        font-size: 9px;
-        gap: 10px;
-        letter-spacing: .4px;
-      }
-
-      .hero-bottom-inner > span:last-child { display: none; }
-
-      .ticker-track {
-        justify-content: flex-start;
-        white-space: nowrap;
-        flex-wrap: nowrap;
-        width: max-content;
-        animation: tickerMove 24s linear infinite;
-      }
-
-      @keyframes tickerMove {
-        to { transform: translateX(-25%); }
-      }
-
-      .section-heading {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        margin-bottom: 28px;
-      }
-
-      .section-title { font-size: clamp(49px,14vw,73px); }
-
-      .equipment-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .equipment-card { min-height: 285px; }
-      .equipment-number { top: 10px; left: 10px; }
-      .equipment-content { left: 13px; right: 12px; bottom: 15px; }
-      .equipment-content h3 { font-size: 25px; }
-      .equipment-content p { font-size: 11px; }
-      .equipment-content a { font-size: 10px; }
-
-      .about-grid,
-      .custom-grid,
-      .contact-grid,
-      .faq-grid {
-        grid-template-columns: 1fr;
-        gap: 38px;
-      }
-
-      .about-image { min-height: 430px; }
-      .image-stamp { left: 18px; bottom: 18px; padding: 17px; }
-      .image-stamp strong { font-size: 29px; }
-
-      .benefit-grid { grid-template-columns: 1fr 1fr; gap: 25px 15px; }
-      .benefit strong { font-size: 26px; }
-      .benefit p { font-size: 10px; }
-
-      .package-grid { grid-template-columns: 1fr; }
-      .package { min-height: 380px; padding: 28px 23px; }
-      .package h3 { margin-top: 30px; }
-
-      .custom h2 { font-size: clamp(58px,15vw,84px); }
-      .custom-panel { padding: 23px; }
-
-      .process-grid { grid-template-columns: 1fr; }
-      .process-step {
-        min-height: auto;
-        padding: 24px;
-        border-right: 0;
-        border-bottom: 1px solid #cbd0c4;
-      }
-      .process-step:last-child { border-bottom: 0; }
-      .process-step h3 { margin-top: 27px; }
-
-      .faq-grid { gap: 28px; }
-      .faq-list summary { font-size: 13px; }
-
-      .contact { padding-top: 70px; }
-      .contact h2 { font-size: clamp(67px,16vw,100px); }
-      .contact-grid { padding-bottom: 45px; }
-      .map { height: 280px; }
-      .map-label { left: 18px; bottom: 15px; font-size: 9px; }
-
-      .footer-main { align-items: flex-start; flex-direction: column; }
-      .footer-links { gap: 15px; }
-      .footer-bottom { flex-direction: column; gap: 8px; }
-
-      .whatsapp-float {
-        right: 15px;
-        bottom: 15px;
-        width: 53px;
-        height: 53px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .container { width: calc(100% - 28px); }
-      .equipment-card { min-height: 260px; }
-      .equipment-content h3 { font-size: 22px; }
-      .brand-name { font-size: 23px; }
-      .hero h1 { font-size: 60px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10120f">
+<meta name="description" content="WellBuilt Fitness — Professional commercial gym equipment, home gym solutions and complete fitness facility installations across India.">
+<title>WellBuilt Fitness | Engineer Your Strength</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #10120f;
+  --panel: #181b16;
+  --panel2: #20231c;
+  --lime: #c8f169;
+  --white: #f4f4ed;
+  --muted: #a1a59a;
+  --line: rgba(255,255,255,.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+img { display: block; width: 100%; object-fit: cover; }
+.container { width: min(1160px, 90%); margin: auto; }
+.eyebrow {
+  color: var(--lime); font-size: .73rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+}
+h1, h2, h3, .brand {
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase; line-height: .98;
+}
+h2 { font-size: clamp(2.7rem, 6vw, 5rem); letter-spacing: -1px; }
+.section { padding: 100px 0; }
+.section-head {
+  display: flex; justify-content: space-between; align-items: end;
+  gap: 25px; margin-bottom: 42px;
+}
+.section-head p { max-width: 400px; color: var(--muted); font-size: .94rem; }
+.accent { color: var(--lime); }
+.btn {
+  min-height: 48px; display: inline-flex; justify-content: center;
+  align-items: center; gap: 10px; padding: 13px 21px;
+  background: var(--lime); color: #12150e; border: 1px solid var(--lime);
+  font-weight: 700; font-size: .85rem; cursor: pointer;
+  transition: .25s;
+}
+.btn:hover { background: #d8ff8a; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border-color: #55594e; }
+.btn-outline:hover { color: var(--lime); background: transparent; border-color: var(--lime); }
+header {
+  height: 78px; display: flex; align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(16,18,15,.94); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+.brand { font-size: 1.85rem; font-weight: 900; letter-spacing: -.5px; white-space: nowrap; }
+.brand span { color: var(--lime); }
+.brand small {
+  display: block; font: 600 .53rem "DM Sans", sans-serif;
+  letter-spacing: 3px; color: var(--muted); margin-top: 3px;
+}
+.nav-links { display: flex; align-items: center; gap: 27px; }
+.nav-links a { font-size: .8rem; color: #c9cbc3; transition: .2s; }
+.nav-links a:hover { color: var(--lime); }
+.menu-toggle {
+  display: none; color: var(--white); background: none;
+  border: 0; font-size: 1.7rem; cursor: pointer;
+}
+.hero { padding: 32px 0 70px; }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1.03fr;
+  align-items: center; gap: 42px; min-height: 565px;
+}
+.hero-copy { padding: 30px 0; }
+.hero-copy h1 {
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  font-weight: 900; letter-spacing: -2px; margin: 22px 0;
+}
+.hero-copy h1 span { color: var(--lime); }
+.hero-copy > p { color: var(--muted); max-width: 480px; font-size: 1rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-proof {
+  display: flex; flex-wrap: wrap; gap: 24px; margin-top: 38px;
+  padding-top: 25px; border-top: 1px solid var(--line);
+}
+.proof strong { display: block; font: 700 1.7rem "Barlow Condensed", sans-serif; }
+.proof span { font-size: .7rem; color: var(--muted); }
+.hero-visual { position: relative; min-height: 510px; }
+.hero-image {
+  position: absolute; inset: 0; height: 100%;
+  background: #262820;
+}
+.hero-image img { height: 100%; filter: brightness(.76); }
+.hero-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg,rgba(16,18,15,.9),transparent 65%);
+  pointer-events: none;
+}
+.image-label {
+  position: absolute; z-index: 2; bottom: 28px; left: 27px; right: 27px;
+  display: flex; justify-content: space-between; align-items: end; gap: 10px;
+}
+.image-label h3 { font-size: 2.1rem; }
+.image-label p { color: #d4d7cd; font-size: .75rem; }
+.image-index { color: var(--lime); font: 700 2.5rem "Barlow Condensed",sans-serif; }
+.marquee {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 20px 0; overflow: hidden; background: #151811;
+}
+.marquee-inner {
+  display: flex; justify-content: space-around; flex-wrap: wrap;
+  gap: 15px 25px; color: #d7d9d1;
+  font: 700 1rem "Barlow Condensed", sans-serif; letter-spacing: 1px;
+}
+.marquee span::before { content: "✳"; color: var(--lime); margin-right: 10px; }
+.about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 65px; align-items: center; }
+.about-image { height: 440px; position: relative; background: var(--panel); }
+.about-image img { height: 100%; }
+.image-note {
+  position: absolute; bottom: 18px; left: 18px;
+  background: var(--lime); color: #11140d; padding: 13px 18px;
+  font-size: .78rem; font-weight: 700;
+}
+.about-copy h2 { margin: 20px 0; }
+.about-copy > p { color: var(--muted); margin: 20px 0; font-size: .94rem; }
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 27px 0; }
+.feature { border-top: 1px solid var(--line); padding-top: 14px; }
+.feature strong { display: block; font-size: .9rem; margin-bottom: 4px; }
+.feature span { font-size: .77rem; color: var(--muted); }
+.products { background: #151711; }
+.product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.product-card { background: var(--panel); border: 1px solid var(--line); overflow: hidden; transition: .25s; }
+.product-card:hover { border-color: rgba(200,241,105,.65); transform: translateY(-5px); }
+.product-img { height: 245px; overflow: hidden; background: #25271f; }
+.product-img img { height: 100%; transition: transform .5s; }
+.product-card:hover img { transform: scale(1.05); }
+.product-info { padding: 23px; }
+.product-number { color: var(--lime); font-size: .7rem; letter-spacing: 2px; }
+.product-info h3 { font-size: 1.8rem; margin: 12px 0; }
+.product-info p { font-size: .82rem; color: var(--muted); min-height: 52px; }
+.text-link { display: inline-block; margin-top: 20px; color: var(--lime); font-size: .8rem; font-weight: 700; }
+.text-link span { padding-left: 7px; }
+.solutions-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.solution {
+  min-height: 340px; padding: 27px; display: flex; flex-direction: column;
+  justify-content: end; position: relative; overflow: hidden; background: var(--panel);
+}
+.solution img {
+  position: absolute; inset: 0; height: 100%; opacity: .57; transition: .5s;
+}
+.solution:hover img { transform: scale(1.06); opacity: .75; }
+.solution::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg, #10120f 0%,rgba(16,18,15,.2) 100%);
+}
+.solution-content { position: relative; z-index: 2; }
+.solution h3 { font-size: 2.2rem; margin: 10px 0; }
+.solution p { font-size: .82rem; color: #d1d4cb; }
+.projects { background: #151711; }
+.project-grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 16px; }
+.project { position: relative; height: 300px; overflow: hidden; background: var(--panel); }
+.project img { height: 100%; transition: .5s; }
+.project:hover img { transform: scale(1.05); }
+.project::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg,rgba(0,0,0,.8),transparent 75%);
+}
+.project-caption { position: absolute; z-index: 2; left: 19px; bottom: 19px; }
+.project-caption span { font-size: .7rem; color: var(--lime); }
+.project-caption h3 { font-size: 1.6rem; margin-top: 6px; }
+.process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.process-card { border-top: 1px solid #55594e; padding-top: 22px; }
+.process-num { color: var(--lime); font: 700 2.8rem "Barlow Condensed",sans-serif; }
+.process-card h3 { font-size: 1.55rem; margin: 15px 0 10px; }
+.process-card p { font-size: .82rem; color: var(--muted); }
+.cta { padding: 75px 0; background: var(--lime); color: #151811; }
+.cta-grid { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.cta h2 { font-size: clamp(2.8rem,6vw,5.2rem); max-width: 750px; }
+.cta p { margin-top: 15px; max-width: 570px; }
+.cta .btn { background: #151811; border-color: #151811; color: white; flex-shrink: 0; }
+.contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; }
+.contact-copy h2 { margin: 20px 0; }
+.contact-copy > p { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+.contact-detail { padding: 17px 0; border-top: 1px solid var(--line); }
+.contact-detail small { display: block; color: var(--muted); font-size: .75rem; margin-bottom: 5px; }
+.contact-detail a { font-size: 1rem; font-weight: 600; }
+form { background: var(--panel); border: 1px solid var(--line); padding: 30px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field.full { grid-column: 1/-1; }
+.field label { font-size: .76rem; color: #d9dbd4; }
+.field input, .field select, .field textarea {
+  width: 100%; min-width: 0; background: #10120f; color: var(--white);
+  border: 1px solid #41443a; border-radius: 0; padding: 13px;
+  outline: none; font-size: .85rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--lime); }
+.field textarea { min-height: 105px; resize: vertical; }
+form .btn { width: 100%; margin-top: 20px; }
+.form-note { color: var(--muted); font-size: .7rem; margin-top: 12px; }
+footer { padding: 32px 0; border-top: 1px solid var(--line); }
+.footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.footer-inner p { color: var(--muted); font-size: .75rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; }
+.whatsapp-float {
+  position: fixed; z-index: 90; right: 22px; bottom: 22px;
+  width: 55px; height: 55px; border-radius: 50%; display: grid;
+  place-items: center; background: #25d366; color: #fff;
+  box-shadow: 0 6px 25px #0006; font-size: 1.6rem;
+}
+@media(max-width: 900px) {
+  .nav-links { gap: 15px; }
+  .nav-links a { font-size: .74rem; }
+  .nav > .btn { padding: 11px 13px; }
+  .hero-grid { gap: 24px; }
+  .hero-visual { min-height: 450px; }
+  .about-grid { gap: 35px; }
+  .product-grid { grid-template-columns: repeat(2,1fr); }
+  .process-grid { grid-template-columns: repeat(2,1fr); row-gap: 35px; }
+  .project-grid { grid-template-columns: repeat(2,1fr); }
+  .project:first-child { grid-column: 1/-1; }
+  .contact-grid { gap: 30px; }
+}
+@media(max-width: 680px) {
+  .container { width: min(100% - 34px, 540px); }
+  .section { padding: 70px 0; }
+  header { height: 70px; }
+  .brand { font-size: 1.55rem; }
+  .brand small { font-size: .45rem; }
+  .menu-toggle { display: block; margin-left: auto; }
+  .nav > .btn { display: none; }
+  .nav-links {
+    display: none; position: absolute; top: 69px; left: 0; right: 0;
+    padding: 22px 25px 26px; background: #151711;
+    border-bottom: 1px solid var(--line); flex-direction: column;
+    align-items: stretch; gap: 0;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 13px 0; font-size: .9rem; border-bottom: 1px solid var(--line); }
+  .nav-links a:last-child { border: 0; }
+  .hero { padding-top: 14px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+  .hero-copy { padding: 36px 0 0; }
+  .hero-copy h1 { font-size: clamp(4rem,17vw,6.4rem); margin: 20px 0; }
+  .hero-copy > p { font-size: .9rem; }
+  .hero-visual { min-height: 370px; }
+  .hero-proof { gap: 20px; justify-content: space-between; }
+  .proof strong { font-size: 1.5rem; }
+  .proof span { font-size: .65rem; }
+  .section-head { flex-direction: column; align-items: start; gap: 16px; margin-bottom: 28px; }
+  .section-head p { font-size: .85rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 30px; }
+  .about-image { height: 320px; }
+  .about-copy h2 { font-size: 3.4rem; }
+  .features { gap: 14px; }
+  .product-grid { grid-template-columns: 1fr; gap: 16px; }
+  .product-img { height: 255px; }
+  .product-info p { min-height: 0; }
+  .solutions-grid { grid-template-columns: 1fr; }
+  .solution { min-height: 300px; }
+  .project-grid { grid-template-columns: 1fr; }
+  .project:first-child { grid-column: auto; }
+  .project { height: 280px; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .process-num { font-size: 2.3rem; }
+  .process-card h3 { font-size: 1.35rem; }
+  .cta { padding: 60px 0; }
+  .cta-grid { flex-direction: column; align-items: start; }
+  .cta h2 { font-size: 3.4rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+  form { padding: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .footer-inner { flex-direction: column; align-items: start; }
+  .whatsapp-float { right: 14px; bottom: 14px; width: 50px; height: 50px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
 </head>
 
 <body>
-
-  <!-- HEADER -->
-  <header class="header">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="R.M Fitness home">
-        <span class="brand-symbol">RM</span>
-        <span>
-          <span class="brand-name">R.M FITNESS</span>
-          <span class="brand-caption">ENGINEERED TO PERFORM</span>
-        </span>
-      </a>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#equipment">Equipment</a>
-        <a href="#about">About Us</a>
-        <a href="#packages">Gym Packages</a>
-        <a href="#custom">Customisation</a>
-        <a href="#contact" class="mobile-contact">GET A QUOTE ↗</a>
-      </div>
-
-      <a class="btn" href="#contact">GET A QUOTE ↗</a>
-
-      <button class="menu-toggle" id="menuToggle"
-        type="button" aria-label="Open navigation menu"
-        aria-expanded="false" aria-controls="navLinks">☰</button>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">WELLBUILT<span>.</span><small>ENGINEER YOUR STRENGTH</small></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#products">Equipment</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </nav>
-  </header>
+    <a class="btn" href="#contact">GET A QUOTE ↗</a>
+  </div>
+</header>
 
-  <main>
-
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="hero-label"><span></span> COMMERCIAL FITNESS EQUIPMENT</div>
-
-          <h1>
-            BUILT FOR
-            <span class="outline">SERIOUS</span>
-            <span class="highlight">TRAINING.</span>
-          </h1>
-
-          <p class="hero-description">
-            From powerful individual machines to complete commercial gym
-            setups, equip your fitness business with machinery built for
-            demanding training environments.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn" href="#equipment">EXPLORE EQUIPMENT ↗</a>
-            <a class="btn btn-outline"
-              href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20would%20like%20to%20discuss%20my%20gym%20equipment%20requirements."
-              target="_blank" rel="noopener">DISCUSS YOUR SETUP</a>
-          </div>
-        </div>
-
-        <aside class="hero-aside">
-          <strong>01 / 04</strong>
-          <p>Strength<br>Cardio<br>Customisation<br>Complete setups</p>
-          <hr>
-          <strong>INDIA</strong>
-          <p>Meerut-based<br>Pan-India reach</p>
-        </aside>
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">BUILT FOR PERFORMANCE. DESIGNED TO LAST.</span>
+      <h1>BUILD<br>YOUR <span>STRONGEST</span><br>SPACE.</h1>
+      <p>Professional fitness equipment and complete gym solutions for commercial facilities, residential spaces and corporate fitness centres across India.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#products">EXPLORE EQUIPMENT ↗</a>
+        <a class="btn btn-outline" href="#contact">PLAN YOUR GYM</a>
       </div>
-
-      <div class="hero-bottom">
-        <div class="container hero-bottom-inner">
-          <span>● COMMERCIAL-GRADE EQUIPMENT</span>
-          <span>MEERUT, UTTAR PRADESH</span>
-          <span>BUILT AROUND YOUR BUSINESS ↘</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- HIGHLIGHT STRIP -->
-    <div class="ticker" aria-label="R.M Fitness services">
-      <div class="ticker-track">
-        <span>Strength Equipment</span>
-        <span>Commercial Setups</span>
-        <span>Custom Finishes</span>
-        <span>Pan-India Delivery</span>
+      <div class="hero-proof">
+        <div class="proof"><strong>20+ YRS</strong><span>Industry experience*</span></div>
+        <div class="proof"><strong>7 LAKH+</strong><span>Setups reported*</span></div>
+        <div class="proof"><strong>PAN INDIA</strong><span>Delivery & installation</span></div>
       </div>
     </div>
-
-    <!-- EQUIPMENT -->
-    <section class="section equipment" id="equipment">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <span class="eyebrow">THE EQUIPMENT</span>
-            <h2 class="section-title">YOUR GYM.<br><span>YOUR STANDARD.</span></h2>
-          </div>
-          <p class="section-description">
-            Explore equipment categories for commercial fitness spaces.
-            Contact R.M Fitness to confirm available models, dimensions,
-            specifications and current stock.
-          </p>
-        </div>
-
-        <div class="equipment-grid">
-
-          <article class="equipment-card" style="--image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80')">
-            <span class="equipment-number">01</span>
-            <div class="equipment-content">
-              <h3>Strength<br>Machines</h3>
-              <p>Build a versatile strength-training floor.</p>
-              <a href="#contact">ENQUIRE NOW ↗</a>
-            </div>
-          </article>
-
-          <article class="equipment-card" style="--image:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80')">
-            <span class="equipment-number">02</span>
-            <div class="equipment-content">
-              <h3>Free<br>Weights</h3>
-              <p>Equipment for focused strength and conditioning.</p>
-              <a href="#contact">ENQUIRE NOW ↗</a>
-            </div>
-          </article>
-
-          <article class="equipment-card" style="--image:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=800&q=80')">
-            <span class="equipment-number">03</span>
-            <div class="equipment-content">
-              <h3>Cardio<br>Equipment</h3>
-              <p>Plan a balanced training experience for members.</p>
-              <a href="#contact">ENQUIRE NOW ↗</a>
-            </div>
-          </article>
-
-          <article class="equipment-card" style="--image:url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80')">
-            <span class="equipment-number">04</span>
-            <div class="equipment-content">
-              <h3>Complete<br>Gym Setup</h3>
-              <p>Discuss equipment combinations for your floor plan.</p>
-              <a href="#packages">VIEW PACKAGES ↗</a>
-            </div>
-          </article>
-
-        </div>
+    <div class="hero-visual">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85" alt="Modern professional gym with strength training equipment">
       </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section about" id="about">
-      <div class="container about-grid">
-        <div class="about-image reveal" role="img"
-          aria-label="Illustrative commercial fitness equipment photograph">
-          <div class="image-stamp">
-            <strong>POWER YOUR<br>VISION.</strong>
-            <span>For gyms that mean business.</span>
-          </div>
-        </div>
-
-        <div class="about-copy reveal">
-          <span class="eyebrow">ABOUT R.M FITNESS</span>
-          <h2 class="section-title">EQUIPPING<br><span>YOUR AMBITION.</span></h2>
-
-          <p>
-            Based in Meerut, Uttar Pradesh, R.M Fitness specialises in
-            commercial gym equipment manufacturing and complete fitness
-            facility setups.
-          </p>
-
-          <p>
-            Whether you're setting up your first gym, expanding an existing
-            facility or sourcing individual machines, start with a
-            conversation about your requirements.
-          </p>
-
-          <div class="feature-list">
-            <div class="feature">
-              <span class="feature-icon">↗</span>
-              <div>
-                <h3>Commercial-Focused Equipment</h3>
-                <p>Explore machine options designed for commercial training spaces.</p>
-              </div>
-            </div>
-
-            <div class="feature">
-              <span class="feature-icon">✳</span>
-              <div>
-                <h3>Customisation Options</h3>
-                <p>Ask about available frame colours, cushion finishes and specifications.</p>
-              </div>
-            </div>
-
-            <div class="feature">
-              <span class="feature-icon">⌖</span>
-              <div>
-                <h3>Pan-India Enquiries</h3>
-                <p>Discuss delivery, installation availability and timelines for your city.</p>
-              </div>
-            </div>
-          </div>
-
-          <a class="btn" href="#contact">TALK TO THE TEAM ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS -->
-    <section class="benefits">
-      <div class="container benefit-grid">
-        <div class="benefit">
-          <strong>STRENGTH</strong>
-          <p>Commercial equipment solutions</p>
-        </div>
-        <div class="benefit">
-          <strong>YOUR VISION</strong>
-          <p>Equipment planning for your space</p>
-        </div>
-        <div class="benefit">
-          <strong>YOUR FINISH</strong>
-          <p>Ask about custom options</p>
-        </div>
-        <div class="benefit">
-          <strong>ACROSS INDIA</strong>
-          <p>Delivery and installation enquiries</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PACKAGES -->
-    <section class="section packages" id="packages">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <span class="eyebrow">COMPLETE GYM SOLUTIONS</span>
-            <h2 class="section-title">START STRONG.<br><span>SCALE SMART.</span></h2>
-          </div>
-          <p class="section-description">
-            Planning a new fitness business? Explore the indicative package
-            references provided for this demonstration and request a current,
-            itemised quotation from R.M Fitness.
-          </p>
-        </div>
-
-        <div class="package-grid">
-
-          <article class="package reveal">
-            <div class="package-top">
-              <span class="package-type">Package 01</span>
-            </div>
-            <h3>Commercial<br>Gym Setup</h3>
-            <p>
-              A starting point for discussing a practical equipment
-              combination for a new fitness facility.
-            </p>
-            <div class="price">₹4.45 Lakh<small>* onwards reference</small></div>
-            <p class="package-note">
-              Final cost and inclusions must be confirmed directly.
-            </p>
-            <a class="btn btn-dark"
-              href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20please%20share%20the%20latest%20details%20of%20your%20commercial%20gym%20setup%20package."
-              target="_blank" rel="noopener">REQUEST PACKAGE DETAILS ↗</a>
-          </article>
-
-          <article class="package featured reveal">
-            <div class="package-top">
-              <span class="package-type">Package 02</span>
-              <span class="popular">Premium Series</span>
-            </div>
-            <h3>Royal Series<br>Setup</h3>
-            <p>
-              Discuss a more comprehensive equipment plan tailored to
-              the needs and positioning of your fitness business.
-            </p>
-            <div class="price">₹7.95 Lakh<small>* onwards reference</small></div>
-            <p class="package-note">
-              Confirm current price, machinery list and inclusions.
-            </p>
-            <a class="btn"
-              href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20am%20interested%20in%20the%20Royal%20Series%20gym%20setup.%20Please%20share%20the%20latest%20quotation."
-              target="_blank" rel="noopener">ENQUIRE ABOUT ROYAL SERIES ↗</a>
-          </article>
-
-        </div>
-
-        <p class="package-disclaimer">
-          *Prices are indicative references supplied for this demo, not verified
-          live offers. Confirm the latest written quotation, equipment list,
-          taxes, transport, installation, warranty and other terms with R.M Fitness.
-        </p>
-      </div>
-    </section>
-
-    <!-- CUSTOMISATION -->
-    <section class="section custom" id="custom">
-      <div class="container custom-grid">
-        <div class="custom-copy reveal">
-          <span class="eyebrow">MAKE IT YOURS</span>
-          <h2>YOUR BRAND.<br><span>YOUR LOOK.</span></h2>
-          <p>
-            Your gym should reflect your identity. Discuss available frame
-            colours, cushion finishes, equipment specifications and other
-            customisation possibilities with the R.M Fitness team.
-          </p>
-
-          <div class="color-options">
-            <span class="swatch" style="background:#151515"></span>
-            <span class="swatch" style="background:#c52525"></span>
-            <span class="swatch" style="background:#d9d9d9"></span>
-            <span class="swatch" style="background:#143f84"></span>
-            <span class="swatch-label">Ask about available finishes</span>
-          </div>
-
-          <a class="btn"
-            href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20would%20like%20to%20ask%20about%20custom%20frame%20and%20cushion%20colours%20for%20gym%20equipment."
-            target="_blank" rel="noopener">DISCUSS CUSTOMISATION ↗</a>
-        </div>
-
-        <div class="custom-panel reveal">
-          <small>YOUR PROJECT / YOUR SPECIFICATIONS</small>
-          <h3>Plan the<br>details.</h3>
-          <ul>
-            <li>Frame colour options <span>↗</span></li>
-            <li>Cushion finish options <span>↗</span></li>
-            <li>Machine selection <span>↗</span></li>
-            <li>Equipment combinations <span>↗</span></li>
-            <li>Delivery and installation <span>↗</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section class="section process">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div>
-            <span class="eyebrow">SIMPLE PROCESS</span>
-            <h2 class="section-title">FROM IDEA<br><span>TO YOUR GYM.</span></h2>
-          </div>
-          <p class="section-description">
-            Start with a few essential details so the team can understand
-            what you need and guide your next steps.
-          </p>
-        </div>
-
-        <div class="process-grid reveal">
-          <article class="process-step">
-            <div class="step-top">STEP 01 <span>↗</span></div>
-            <h3>Share Your Vision</h3>
-            <p>
-              Tell the team your city, gym size, approximate budget and
-              equipment requirements.
-            </p>
-          </article>
-
-          <article class="process-step">
-            <div class="step-top">STEP 02 <span>↗</span></div>
-            <h3>Plan Your Setup</h3>
-            <p>
-              Discuss suitable machinery, package options, finishes and
-              an itemised quotation.
-            </p>
-          </article>
-
-          <article class="process-step">
-            <div class="step-top">STEP 03 <span>↗</span></div>
-            <h3>Confirm the Details</h3>
-            <p>
-              Verify availability, delivery timelines, installation scope,
-              payment terms and warranty before ordering.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section faq" id="faq">
-      <div class="container faq-grid">
-        <div class="faq-intro reveal">
-          <span class="eyebrow">GOT QUESTIONS?</span>
-          <h2 class="section-title">GOOD TO<br><span>KNOW.</span></h2>
-          <p>
-            Have questions before planning your gym? Contact the team
-            for details specific to your requirements.
-          </p>
-          <a class="btn"
-            href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20have%20some%20questions%20about%20your%20gym%20equipment."
-            target="_blank" rel="noopener">ASK ON WHATSAPP ↗</a>
-        </div>
-
-        <div class="faq-list reveal">
-          <details>
-            <summary>Can I get a complete commercial gym setup?<span>+</span></summary>
-            <div class="faq-answer">
-              R.M Fitness offers commercial gym setup packages. Share your
-              city, approximate floor area, budget and training requirements
-              to discuss available options.
-            </div>
-          </details>
-
-          <details>
-            <summary>Is pan-India delivery available?<span>+</span></summary>
-            <div class="faq-answer">
-              Pan-India delivery and installation are listed among the
-              services provided. Confirm delivery coverage, transport costs
-              and installation availability for your location.
-            </div>
-          </details>
-
-          <details>
-            <summary>Can I customise machine colours?<span>+</span></summary>
-            <div class="faq-answer">
-              Ask the R.M Fitness team about current frame colours, cushion
-              finishes, minimum order requirements and additional costs.
-            </div>
-          </details>
-
-          <details>
-            <summary>Are the package prices fixed?<span>+</span></summary>
-            <div class="faq-answer">
-              Prices on this demonstration website are indicative references.
-              Request the latest written quotation and confirm the equipment
-              list, taxes, delivery, installation and warranty.
-            </div>
-          </details>
-
-          <details>
-            <summary>How do I get a quotation?<span>+</span></summary>
-            <div class="faq-answer">
-              Call or WhatsApp the team. Sharing your city, floor area,
-              preferred machinery and estimated budget can help start the
-              discussion.
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-copy reveal">
-          <span class="eyebrow">LET'S BUILD SOMETHING STRONG</span>
-          <h2>READY.<span>SET. LIFT.</span></h2>
-          <p>
-            Looking for individual machines or planning a complete commercial
-            gym? Connect with R.M Fitness to discuss requirements and request
-            the latest product information.
-          </p>
-
-          <div class="contact-actions">
-            <a class="btn btn-dark"
-              href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20would%20like%20to%20get%20a%20quotation%20for%20gym%20equipment."
-              target="_blank" rel="noopener">WHATSAPP THE TEAM ↗</a>
-            <a class="btn btn-outline"
-              style="border-color:#0a0d0a;color:#0a0d0a"
-              href="tel:+919897229440">CALL NOW</a>
-          </div>
-        </div>
-
-        <div class="contact-details reveal">
-          <div class="contact-detail">
-            <span class="detail-icon">☎</span>
-            <div>
-              <span class="detail-label">CALL OUR TEAM</span>
-              <a class="detail-value" href="tel:+919897229440">+91 98972 29440</a>
-              <a class="detail-value" href="tel:+918272039440">+91 82720 39440</a>
-              <a class="detail-value" href="tel:+917037609440">+91 70376 09440</a>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <span class="detail-icon">⌖</span>
-            <div>
-              <span class="detail-label">FACTORY OUTLET</span>
-              <span class="detail-value">
-                Bijli Bamba Bypass, near Jamia Residence,
-                Delhi Road, Meerut, Uttar Pradesh – 250002
-              </span>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <span class="detail-icon">◎</span>
-            <div>
-              <span class="detail-label">FOLLOW ON INSTAGRAM</span>
-              <a class="detail-value"
-                href="https://www.instagram.com/r_m_fitnees/"
-                target="_blank" rel="noopener">@r_m_fitnees ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="map">
-        <iframe
-          title="R.M Fitness factory outlet location in Meerut"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://maps.google.com/maps?q=Bijli%20Bamba%20Bypass%2C%20near%20Jamia%20Residence%2C%20Delhi%20Road%2C%20Meerut%2C%20Uttar%20Pradesh%20250002&output=embed">
-        </iframe>
-
-        <a class="map-label"
-          href="https://www.google.com/maps/search/?api=1&query=Bijli+Bamba+Bypass%2C+near+Jamia+Residence%2C+Delhi+Road%2C+Meerut%2C+Uttar+Pradesh+250002"
-          target="_blank" rel="noopener">OPEN IN GOOGLE MAPS ↗</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-main">
-      <a class="brand" href="#home">
-        <span class="brand-symbol">RM</span>
-        <span>
-          <span class="brand-name">R.M FITNESS</span>
-          <span class="brand-caption">ENGINEERED TO PERFORM</span>
-        </span>
-      </a>
-
-      <p>Commercial gym equipment · Meerut, India</p>
-
-      <div class="footer-links">
-        <a href="#equipment">Equipment</a>
-        <a href="#about">About</a>
-        <a href="#packages">Packages</a>
-        <a href="#contact">Contact</a>
-        <a href="https://www.instagram.com/r_m_fitnees/"
-          target="_blank" rel="noopener">Instagram ↗</a>
+      <div class="image-label">
+        <div><p>THE WELLBUILT STANDARD</p><h3>MADE TO PERFORM.</h3></div>
+        <span class="image-index">01/04</span>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="container footer-bottom">
-      <span>© <span id="year"></span> R.M Fitness · Demonstration website</span>
-      <span>Product images are illustrative. Confirm actual products and prices with the company.</span>
+<div class="marquee">
+  <div class="container marquee-inner">
+    <span>STRENGTH EQUIPMENT</span><span>CARDIO SYSTEMS</span>
+    <span>FUNCTIONAL TRAINING</span><span>COMPLETE GYM SETUPS</span>
+  </div>
+</div>
+
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85" alt="Strength training equipment in a professional fitness facility" loading="lazy">
+      <div class="image-note">ENGINEERED FOR EVERY REP.</div>
     </div>
-  </footer>
+    <div class="about-copy">
+      <span class="eyebrow">WHO WE ARE</span>
+      <h2>MORE THAN<br><span class="accent">MACHINES.</span><br>A MOVEMENT.</h2>
+      <p>WellBuilt Fitness provides equipment and fitness-space solutions for people building the next generation of training facilities. From individual machines to complete gym setups, the goal is to help make every space work harder.</p>
+      <div class="features">
+        <div class="feature"><strong>01 / Complete Setups</strong><span>Solutions for facilities of different sizes.</span></div>
+        <div class="feature"><strong>02 / Equipment Range</strong><span>Strength, cardio and functional training.</span></div>
+        <div class="feature"><strong>03 / Nationwide Reach</strong><span>Delivery and installation across India.</span></div>
+        <div class="feature"><strong>04 / Project Support</strong><span>Discuss your equipment and space requirements.</span></div>
+      </div>
+      <a class="btn" href="#contact">DISCUSS YOUR PROJECT ↗</a>
+    </div>
+  </div>
+</section>
 
-  <!-- FLOATING WHATSAPP -->
-  <a class="whatsapp-float"
-    href="https://wa.me/919897229440?text=Hello%20R.M%20Fitness%2C%20I%20would%20like%20to%20enquire%20about%20gym%20equipment."
-    target="_blank" rel="noopener"
-    aria-label="Contact R.M Fitness on WhatsApp">
-    <svg viewBox="0 0 24 24" width="29" height="29" fill="currentColor" aria-hidden="true">
-      <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L0 24l6.3-1.7a11.8 11.8 0 0 0 5.7 1.5h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.2-3.4-8.5ZM12.1 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.9 9.9 0 0 1-1.5-5.3c0-5.5 4.5-10 10-10 2.7 0 5.2 1 7.1 2.9a9.9 9.9 0 0 1 2.9 7.1c0 5.5-4.5 10-10 10Zm5.5-7.5c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.5.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/>
-    </svg>
-  </a>
+<section class="section products" id="products">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">THE EQUIPMENT</span><h2>GEAR UP.<br><span class="accent">LEVEL UP.</span></h2></div>
+      <p>Explore equipment categories for a complete training environment. Ask our team about specifications, availability and the right configuration for your space.</p>
+    </div>
+    <div class="product-grid">
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1534368270820-9de3d8053204?auto=format&fit=crop&w=800&q=85" alt="Strength training weights and gym equipment" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">01 / STRENGTH</span><h3>STRENGTH SYSTEMS</h3><p>Build a training floor with equipment for resistance training, muscle development and progressive strength work.</p><a class="text-link" href="#contact" data-category="Strength equipment">ENQUIRE ABOUT EQUIPMENT <span>↗</span></a></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=800&q=85" alt="Cardio training equipment in a gym" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">02 / CARDIO</span><h3>CARDIO MACHINES</h3><p>Plan your cardio zone with equipment options suited to the needs and capacity of your facility.</p><a class="text-link" href="#contact" data-category="Cardio machines">ENQUIRE ABOUT EQUIPMENT <span>↗</span></a></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=85" alt="Functional fitness training area" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">03 / FUNCTIONAL</span><h3>FUNCTIONAL TRAINING</h3><p>Create versatile training areas for movement, conditioning and a range of workout styles.</p><a class="text-link" href="#contact" data-category="Functional training">ENQUIRE ABOUT EQUIPMENT <span>↗</span></a></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=85" alt="Professional resistance training machines" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">04 / MACHINES</span><h3>PIN-LOADED MACHINES</h3><p>Explore machine options for structured workouts and efficient use of commercial gym floor space.</p><a class="text-link" href="#contact" data-category="Pin-loaded machines">ENQUIRE ABOUT EQUIPMENT <span>↗</span></a></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=85" alt="Free weights and strength training equipment" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">05 / FREE WEIGHTS</span><h3>FREE WEIGHTS</h3><p>Plan a dedicated free-weight area with suitable equipment for your members and training goals.</p><a class="text-link" href="#contact" data-category="Free weights">ENQUIRE ABOUT EQUIPMENT <span>↗</span></a></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=800&q=85" alt="Fully equipped commercial fitness centre" loading="lazy"></div>
+        <div class="product-info"><span class="product-number">06 / COMPLETE SETUPS</span><h3>COMPLETE GYM SETUPS</h3><p>Bring equipment categories together in a coordinated solution for your new or upgraded gym.</p><a class="text-link" href="#contact" data-category="Complete gym setup">PLAN A GYM SETUP <span>↗</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Mobile navigation
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+<section class="section" id="solutions">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">SOLUTIONS FOR EVERY SPACE</span><h2>YOUR SPACE.<br><span class="accent">YOUR RULES.</span></h2></div>
+      <p>Different spaces need different plans. Start with your facility type and build an equipment list around your objectives.</p>
+    </div>
+    <div class="solutions-grid">
+      <article class="solution">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80" alt="Commercial gym interior" loading="lazy">
+        <div class="solution-content"><span class="eyebrow">01 / BUSINESS</span><h3>COMMERCIAL GYMS</h3><p>Equipment planning for fitness clubs, independent gyms and larger training facilities.</p><a class="text-link" href="#contact" data-category="Commercial gym setup">BUILD YOUR FACILITY ↗</a></div>
+      </article>
+      <article class="solution">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Personal training in a fitness facility" loading="lazy">
+        <div class="solution-content"><span class="eyebrow">02 / PERSONAL</span><h3>HOME GYMS</h3><p>Create a practical training space around your available room and workout preferences.</p><a class="text-link" href="#contact" data-category="Home gym setup">PLAN YOUR HOME GYM ↗</a></div>
+      </article>
+      <article class="solution">
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=800&q=80" alt="Modern fitness centre for workplace wellness" loading="lazy">
+        <div class="solution-content"><span class="eyebrow">03 / WORKPLACE</span><h3>CORPORATE FITNESS</h3><p>Fitness equipment solutions for workplace wellness spaces and employee training facilities.</p><a class="text-link" href="#contact" data-category="Corporate fitness centre">PLAN YOUR FACILITY ↗</a></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-    function closeMenu() {
-      navLinks.classList.remove("open");
-      document.body.classList.remove("menu-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation menu");
-      menuToggle.textContent = "☰";
-    }
+<section class="section projects" id="projects">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">VISUALISE THE POSSIBILITIES</span><h2>BUILT FOR<br><span class="accent">THE BIG LIFT.</span></h2></div>
+      <p>Explore example fitness environments to help visualise the possibilities for your next project. These images are illustrative, not verified WellBuilt installations.</p>
+    </div>
+    <div class="project-grid">
+      <article class="project"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85" alt="Illustrative commercial gym interior" loading="lazy"><div class="project-caption"><span>CONCEPT 01</span><h3>THE COMMERCIAL FLOOR</h3></div></article>
+      <article class="project"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=700&q=85" alt="Illustrative strength training environment" loading="lazy"><div class="project-caption"><span>CONCEPT 02</span><h3>STRENGTH ZONE</h3></div></article>
+      <article class="project"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=85" alt="Illustrative modern fitness centre" loading="lazy"><div class="project-caption"><span>CONCEPT 03</span><h3>COMPLETE FITNESS</h3></div></article>
+    </div>
+  </div>
+</section>
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      document.body.classList.toggle("menu-open", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">FROM IDEA TO INSTALLATION</span><h2>LET'S BUILD IT<br><span class="accent">STEP BY STEP.</span></h2></div>
+      <p>Start a conversation about your space, equipment needs and project requirements.</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-card"><span class="process-num">01</span><h3>SHARE YOUR VISION</h3><p>Tell us your location, facility type, available floor area and training goals.</p></article>
+      <article class="process-card"><span class="process-num">02</span><h3>DISCUSS EQUIPMENT</h3><p>Identify equipment categories and specifications that fit your requirements.</p></article>
+      <article class="process-card"><span class="process-num">03</span><h3>REQUEST A QUOTE</h3><p>Discuss pricing, availability, delivery and installation requirements.</p></article>
+      <article class="process-card"><span class="process-num">04</span><h3>PLAN YOUR SETUP</h3><p>Coordinate the next steps with the WellBuilt Fitness team.</p></article>
+    </div>
+  </div>
+</section>
 
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", closeMenu);
-    });
+<section class="cta">
+  <div class="container cta-grid">
+    <div><h2>YOUR NEXT GYM STARTS WITH A CONVERSATION.</h2><p>Tell us what you are building. Let's discuss the equipment, space and requirements for your project.</p></div>
+    <a class="btn" href="#contact">START YOUR ENQUIRY ↗</a>
+  </div>
+</section>
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeMenu();
-    });
+<section class="section" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-copy">
+      <span class="eyebrow">LET'S TALK BUSINESS</span>
+      <h2>HAVE A<br><span class="accent">PROJECT?</span></h2>
+      <p>Request product information, discuss a complete gym setup or enquire about equipment pricing. Fill in the details and continue through WhatsApp.</p>
+      <div class="contact-detail"><small>PHONE / WHATSAPP</small><a href="https://wa.me/917417567499" target="_blank" rel="noopener">+91 74175 67499 ↗</a></div>
+      <div class="contact-detail"><small>SERVICE COVERAGE</small><span>Pan India delivery and installation</span></div>
+      <div class="contact-detail"><small>ENQUIRIES</small><span>Equipment • Commercial setups • Home gyms</span></div>
+    </div>
+    <form id="enquiryForm">
+      <div class="form-grid">
+        <div class="field"><label for="name">YOUR NAME *</label><input id="name" name="name" placeholder="Enter your name" required maxlength="80"></div>
+        <div class="field"><label for="phone">PHONE NUMBER *</label><input id="phone" name="phone" type="tel" placeholder="Your contact number" required maxlength="20"></div>
+        <div class="field"><label for="type">FACILITY TYPE *</label><select id="type" name="type" required><option value="">Select facility</option><option>Commercial gym</option><option>Home gym</option><option>Corporate fitness centre</option><option>Hotel / residential project</option><option>Other</option></select></div>
+        <div class="field"><label for="area">AVAILABLE AREA</label><input id="area" name="area" placeholder="e.g. 2,000 sq. ft."></div>
+        <div class="field full"><label for="interest">EQUIPMENT REQUIREMENTS *</label><select id="interest" name="interest" required><option value="">Select equipment</option><option>Strength equipment</option><option>Cardio machines</option><option>Functional training</option><option>Free weights</option><option>Complete gym setup</option><option>Multiple categories</option></select></div>
+        <div class="field full"><label for="message">PROJECT DETAILS</label><textarea id="message" name="message" placeholder="Tell us about your location, budget range or requirements."></textarea></div>
+      </div>
+      <button type="submit" class="btn">SEND ENQUIRY VIA WHATSAPP ↗</button>
+      <p class="form-note">This demo opens WhatsApp with your enquiry details. Your information is not saved on this website.</p>
+    </form>
+  </div>
+</section>
+</main>
 
-    // Automatically update the copyright year
-    document.getElementById("year").textContent = new Date().getFullYear();
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="#home">WELLBUILT<span>.</span><small>ENGINEER YOUR STRENGTH</small></a>
+    <p>© <span id="year"></span> WellBuilt Fitness. Website redesign concept.</p>
+    <div class="footer-links"><a href="#about">About</a><a href="#products">Equipment</a><a href="#contact">Contact</a></div>
+  </div>
+</footer>
 
-    // Reveal sections as they enter the viewport
-    const revealElements = document.querySelectorAll(".reveal");
+<a class="whatsapp-float" href="https://wa.me/917417567499" target="_blank" rel="noopener" aria-label="Contact WellBuilt Fitness on WhatsApp">☏</a>
 
-    if (
-      "IntersectionObserver" in window &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      const observer = new IntersectionObserver((entries, currentObserver) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            currentObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
 
-      revealElements.forEach(element => observer.observe(element));
-    } else {
-      revealElements.forEach(element => element.classList.add("visible"));
-    }
-  </script>
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
 
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.textContent = "☰";
+  });
+});
+
+document.querySelectorAll("[data-category]").forEach(link => {
+  link.addEventListener("click", () => {
+    const interest = document.getElementById("interest");
+    const category = link.dataset.category;
+    const options = [...interest.options];
+    const match = options.find(option =>
+      option.text.toLowerCase() === category.toLowerCase()
+    );
+    if (match) interest.value = match.value;
+  });
+});
+
+document.getElementById("enquiryForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  if (!form.reportValidity()) return;
+
+  const data = new FormData(form);
+  const message = [
+    "Hello WellBuilt Fitness, I would like to enquire about your equipment and services.",
+    "",
+    "Name: " + data.get("name"),
+    "Phone: " + data.get("phone"),
+    "Facility: " + data.get("type"),
+    "Available area: " + (data.get("area") || "Not specified"),
+    "Equipment required: " + data.get("interest"),
+    "Project details: " + (data.get("message") || "Not specified")
+  ].join("\n");
+
+  const whatsappURL = "https://wa.me/917417567499?text=" + encodeURIComponent(message);
+  window.open(whatsappURL, "_blank", "noopener,noreferrer");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
