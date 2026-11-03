@@ -709,7 +709,7 @@ elif page == "Members & Fees":
                         name,phone,email,age,goal,emergency,
                         plan,fee,start,end,slot,trainer,notes
                     )
-                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
                     """,
                     (
                         name,
