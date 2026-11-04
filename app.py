@@ -324,6 +324,9 @@ if "uid" not in st.session_state:
 
 # AUTHENTICATION
 
+
+# AUTHENTICATION
+
 if st.session_state.uid is None:
 
     st.markdown("""
@@ -331,23 +334,33 @@ if st.session_state.uid is None:
         <div class="kicker">APEX FIT · GYM OPERATING SYSTEM</div>
         <h1>Run your gym.<br>Know your numbers.</h1>
         <p class="sub">
-            Member records · fees · attendance · workouts · follow-ups.
+            Member records · Fees · Attendance · Workouts · Follow-ups.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    owners = q("SELECT * FROM owner")
+    st.markdown("### Welcome to Apex Fit")
+    st.caption("Choose how you want to continue.")
 
-    if owners.empty:
+    new_tab, login_tab = st.tabs([
+        "＋ New Gym Owner",
+        "→ Registered User"
+    ])
+
+    # NEW USER REGISTRATION
+    with new_tab:
+
+        st.subheader("Create your gym account")
+        st.write("Set up your gym workspace to get started.")
 
         with st.form("setup"):
 
             gym = st.text_input("Gym name")
-            owner = st.text_input("Owner")
-            user = st.text_input("Username")
+            owner_name = st.text_input("Owner name")
+            user = st.text_input("Create username")
 
             pw = st.text_input(
-                "Password (8+ chars)",
+                "Create password (8+ characters)",
                 type="password"
             )
 
@@ -357,16 +370,23 @@ if st.session_state.uid is None:
             )
 
             go = st.form_submit_button(
-                "Create account",
-                type="primary"
+                "Create Gym Account",
+                type="primary",
+                use_container_width=True
             )
 
         if go:
 
-            if not all([gym, owner, user, pw]) or len(pw) < 8:
-                st.error(
-                    "Complete all fields; password must be 8+ characters."
-                )
+            if not all([
+                gym.strip(),
+                owner_name.strip(),
+                user.strip(),
+                pw
+            ]):
+                st.error("Please complete all fields.")
+
+            elif len(pw) < 8:
+                st.error("Password must contain at least 8 characters.")
 
             elif pw != confirm:
                 st.error("Passwords do not match.")
@@ -376,24 +396,42 @@ if st.session_state.uid is None:
                 salt = secrets.token_bytes(16).hex()
 
                 try:
-                    run(
-                        "INSERT INTO owner(gym,owner,user,salt,hash) VALUES(?,?,?,?,?)",
-                        (
-                            gym,
-                            owner,
-                            user,
-                            salt,
-                            h(pw, salt)
-                        )
-                    )
 
-                    st.success("Account created, sign in.")
+                    with db() as c:
+
+                        cursor = c.execute(
+                            """
+                            INSERT INTO owner(
+                                gym, owner, user, salt, hash
+                            )
+                            VALUES(?,?,?,?,?)
+                            """,
+                            (
+                                gym.strip(),
+                                owner_name.strip(),
+                                user.strip(),
+                                salt,
+                                h(pw, salt)
+                            )
+                        )
+
+                        new_uid = cursor.lastrowid
+                        c.commit()
+
+                    st.session_state.uid = int(new_uid)
+
+                    st.success("Your gym account has been created!")
                     st.rerun()
 
                 except sqlite3.IntegrityError:
-                    st.error("Username already exists.")
 
-    else:
+                    st.error("This username is already registered.")
+
+    # REGISTERED USER LOGIN
+    with login_tab:
+
+        st.subheader("Welcome back")
+        st.write("Sign in to access your gym dashboard.")
 
         with st.form("login"):
 
@@ -405,27 +443,33 @@ if st.session_state.uid is None:
             )
 
             go = st.form_submit_button(
-                "Sign in",
-                type="primary"
+                "Sign In",
+                type="primary",
+                use_container_width=True
             )
 
         if go:
 
             o = q(
                 "SELECT * FROM owner WHERE user=?",
-                (user,)
+                (user.strip(),)
             )
 
-            if not o.empty and h(pw, o.iloc[0].salt) == o.iloc[0]["hash"]:
+            if (
+                not o.empty
+                and h(pw, o.iloc[0]["salt"]) == o.iloc[0]["hash"]
+            ):
 
-                st.session_state.uid = int(o.iloc[0].id)
+                st.session_state.uid = int(o.iloc[0]["id"])
+
+                st.success("Login successful!")
                 st.rerun()
 
             else:
-                st.error("Incorrect username or password.")
+
+                st.error("Invalid username or password.")
 
     st.stop()
-
 
 # MAIN DATA
 
